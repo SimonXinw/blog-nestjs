@@ -42,7 +42,7 @@ export class StudentsController {
 
   @Get('delete-student-name')
   removeStudent(@Query('id', ParseIntPipe) id: number) {
-    return this.studentsService.removeStudent(id);
+    // return this.studentsService.removeStudent(id);
   }
 
   // curl -X POST http://127.0.0.1:8888/students/who-is-request -H 'Content-Type: application/json' -d '{"user": "xinwang"}'
