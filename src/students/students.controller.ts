@@ -34,7 +34,7 @@ export class StudentsController {
     return this.studentsService.getStudentName(id);
   }
 
-  // curl -X POST http://127.0.0.1:8888/students/set-student-name -H 'Content-Type: application/json' -d '{"user": "xw"}'
+  // curl -X POST http://127.0.0.1:8888/students/set-student-name -H 'Content-Type: application/json' -d '{"user": "xinwang"}'
   @Post('set-student-name')
   setStudentName(@User() user: string) {
     return this.studentsService.setStudent(user);
