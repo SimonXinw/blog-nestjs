@@ -29,13 +29,19 @@ export class StudentsService {
    * @获取学生姓名
    */
   async getStudentName(id: number) {
-    this.logger.log(`log >>>>>> get  student id is ${id}`);
+    this.logger.log(`Fn Name: ${this.getStudentName.name} >>> data: ${id}`);
 
-    const results = await this.studentRepository.find();
+    const results = await this.studentRepository.findOne({
+      where: { id },
+    });
+
+    return results ?? '没找到';
   }
 
-  async setStudent(name: string) {
-    const results = await this.studentRepository.create({ name });
+  async setStudentName(name: string) {
+    this.logger.log(`Fn Name: ${this.setStudentName.name} >>> params: ${name}`);
+
+    const results = await this.studentRepository.save({ name });
 
     return results ?? '没找到';
   }
