@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { Student } from './entities/students.entity';
 import { Classes } from './entities/classes.entity';
 
@@ -68,14 +68,16 @@ export class StudentsService {
   }
 
   /**
-   * @更新学生数据
+   * @更新学生数 据
    */
-  async updateStudent(name: string) {
-    this.logger.log(`Fn Name: ${this.setStudentName.name} >>> params: ${name}`);
+  async updateStudent(id: number) {
+    this.logger.log(`Fn Name: ${this.setStudentName.name} >>> params: ${id}`);
 
-    const student = await this.studentRepository.findOne({
-      where: { name },
+    const student = await this.studentRepository.findOneBy({
+      id,
     });
+
+    student.name = '辛望';
 
     const results = await this.studentRepository.save(student);
 
@@ -86,7 +88,11 @@ export class StudentsService {
    * @创建班级
    */
   async setClass(name: string, studentIds: number[]) {
-    const students = await this.studentRepository.find();
+    const students = await this.studentRepository.find({
+      where: {
+        id: In(studentIds),
+      },
+    });
 
     const result = await this.classRepository.save({
       className: name,
