@@ -1,27 +1,27 @@
 import {
   Entity,
   Column,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
-import { Classes } from './classes.entity';
+import { Student } from './students.entity';
 
 @Entity()
-export class Student {
+export class Classes {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar' })
-  name: string;
+  className: string;
+
+  @OneToMany(() => Student, (student) => student.class)
+  students: Student[];
 
   @UpdateDateColumn()
   updateDate: Date;
 
   @CreateDateColumn()
   createDate: Date;
-
-  @ManyToOne(() => Classes, (classes) => classes.students)
-  class: Classes;
 }
