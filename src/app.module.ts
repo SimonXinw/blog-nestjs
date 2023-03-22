@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StudentsModule } from './students/students.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SensitiveController } from './sensitive/sensitive.controller';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true, // 数据库自动同步 entity 文件修改
     }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, SensitiveController],
   providers: [AppService],
 })
 export class AppModule {}
