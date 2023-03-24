@@ -1,9 +1,12 @@
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StudentsModule } from './students/students.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SensitiveController } from './sensitive/sensitive.controller';
+import { SensitiveModule } from './sensitive/sensitive.module';
+import { SensitiveInterceptor } from './common/interceptors/sensitive.interceptor';
 
 @Module({
   imports: [
@@ -18,8 +21,15 @@ import { SensitiveController } from './sensitive/sensitive.controller';
       autoLoadEntities: true, // 自动链接被 forFeature 注册的实体
       synchronize: true, // 数据库自动同步 entity 文件修改
     }),
+    SensitiveModule,
   ],
   controllers: [AppController, SensitiveController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: SensitiveInterceptor,
+    },
+  ],
 })
 export class AppModule {}

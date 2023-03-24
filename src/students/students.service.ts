@@ -19,7 +19,7 @@ export class StudentsService {
    * @GET
    */
   async findAll(name?: string) {
-    // return this.studentRepository.find() ?? 'not fund';
+    return `I m ${name}`;
   }
 
   ImXW(name: string) {

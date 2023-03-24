@@ -12,14 +12,17 @@ import { StudentDto } from './dtos/students.dto';
 import { ClassesDto } from './dtos/classes.dto';
 import { User } from '../common/decorators';
 import { UserGuard } from '../common/guards/user.guard';
+import { SensitiveOperation } from '../common/decorators';
+import { SensitiveType } from '../sensitive/constants';
+import { TransformNamePipe } from '../common/pipes/name.pipes';
 
 @Controller('students')
 export class StudentsController {
   constructor(private readonly studentsService: StudentsService) {}
 
-  // Link - http://localhost:8888/students/who-are-you-get?name=222
+  // Link - http://localhost:8888/students/who-are-you-get?name=xinwnag
   @Get('who-are-you-get')
-  whoAreYou(@Query('name') name: string) {
+  whoAreYou(@Query('name', TransformNamePipe) name: string) {
     return this.studentsService.findAll(name);
   }
 
@@ -40,6 +43,7 @@ export class StudentsController {
 
   // curl -X POST http://127.0.0.1:8888/students/set-student-name -H 'Content-Type: application/json' -d '{"user": "xinwang"}'
   // @NoUser()
+  @SensitiveOperation(SensitiveType.Set)
   @Post('set-student-name')
   setStudentName(@User() user: string) {
     return this.studentsService.setStudentName(user);
