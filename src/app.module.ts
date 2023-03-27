@@ -7,20 +7,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SensitiveController } from './sensitive/sensitive.controller';
 import { SensitiveModule } from './sensitive/sensitive.module';
 import { SensitiveInterceptor } from './common/interceptors/sensitive.interceptor';
+import env from 'config';
 
 @Module({
   imports: [
     StudentsModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: '127.0.0.1',
-      port: 3306,
-      username: 'root',
-      password: '123456',
-      database: 'school',
-      autoLoadEntities: true, // 自动链接被 forFeature 注册的实体
-      synchronize: true, // 数据库自动同步 entity 文件修改
-    }),
+    TypeOrmModule.forRoot(env.DATABASE_CONFIG),
     SensitiveModule,
   ],
   controllers: [AppController, SensitiveController],

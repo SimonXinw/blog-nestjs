@@ -4,9 +4,10 @@
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
+[typeorm]: https://typeorm.io/migrations
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
+    <p align="center"> 
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
@@ -56,6 +57,30 @@ $ pnpm run test:e2e
 
 # test coverage
 $ pnpm run test:cov
+```
+
+# 迁移 migrations
+
+1. 创建 migrations 文件
+
+```bash
+typeorm migration:create ./src/migrations/test
+```
+
+2. 运行 migrations 文件下 \*.ts 文件里面的 up 方法
+
+```bash
+typeorm migration:run -- -d path-to-datasource-config
+# 如果是 commonjs 项目
+npx typeorm-ts-node-commonjs migration:run -- -d path-to-datasource-config
+# 如果是 esm 项目
+npx typeorm-ts-node-esm migration:run -- -d path-to-datasource-config
+```
+
+# 3. 生成迁移
+
+```bash
+typeorm migration:generate -n test
 ```
 
 ## Support

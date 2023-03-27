@@ -16,6 +16,9 @@ export class Student {
   @Column({ type: 'varchar' })
   name: string;
 
+  @Column({ type: 'varchar' })
+  age: string;
+
   @UpdateDateColumn()
   updateDate: Date;
 
