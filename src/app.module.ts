@@ -7,14 +7,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SensitiveController } from './sensitive/sensitive.controller';
 import { SensitiveModule } from './sensitive/sensitive.module';
 import { SensitiveInterceptor } from './common/interceptors/sensitive.interceptor';
-import env from 'config';
+// import env from 'config';
+import { ormConfig } from './config/db.config';
 
 @Module({
-  imports: [
-    StudentsModule,
-    TypeOrmModule.forRoot(env.DATABASE_CONFIG),
-    SensitiveModule,
-  ],
+  imports: [StudentsModule, TypeOrmModule.forRoot(ormConfig), SensitiveModule],
   controllers: [AppController, SensitiveController],
   providers: [
     AppService,

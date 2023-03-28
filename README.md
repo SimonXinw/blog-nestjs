@@ -61,27 +61,33 @@ $ pnpm run test:cov
 
 # 迁移 migrations
 
-1. 创建 migrations 文件
+1. 创建 migrations  空文件
 
 ```bash
 typeorm migration:create ./src/migrations/test
 ```
-
-2. 运行 migrations 文件下 \*.ts 文件里面的 up 方法
+# 2. 生成变化的 migrations 迁移文件
 
 ```bash
-typeorm migration:run -- -d path-to-datasource-config
-# 如果是 commonjs 项目
-npx typeorm-ts-node-commonjs migration:run -- -d path-to-datasource-config
-# 如果是 esm 项目
+pnpm typeorm-ts-node-esm migration:generate ./migrations/test -d ./src/config/db.config.ts
+```
+
+3. 运行 migrations 文件下 \*.ts 文件里面的 up 方法
+
+```bash
+# 试试
+pnpm typeorm migration:run -d ./src/config/db.config.ts 
+# 通用 命令 有用
+pnpm typeorm migration:run -- -d ./src/config/db.config.ts 
+# 兼容 js ts 命令
+
+#  commonjs 项目
 npx typeorm-ts-node-esm migration:run -- -d path-to-datasource-config
+# esm 项目
+pnpm typeorm-ts-node-esm migration:run -- -d ./src/config/db.config.ts
 ```
 
-# 3. 生成迁移
 
-```bash
-typeorm migration:generate -n test
-```
 
 ## Support
 
