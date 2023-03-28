@@ -23,7 +23,7 @@ export class StudentsService {
   }
 
   ImXW(name: string) {
-    this.logger.log(`log >>>> >>   get student name is ${name}`);
+    this.logger.log(`log >>>> >>  get student name is ${name}`);
 
     return 'not fund';
   }
