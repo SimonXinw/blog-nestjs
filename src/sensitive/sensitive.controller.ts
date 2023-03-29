@@ -1,8 +1,10 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { SensitiveService } from './sensitive.service';
 import { SensitiveType } from './constants';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('sensitive')
+@ApiTags('敏感数据')
 export class SensitiveController {
   constructor(private readonly sensitiveService: SensitiveService) {}
 

@@ -15,8 +15,10 @@ import { UserGuard } from '../common/guards/user.guard';
 import { SensitiveOperation } from '../common/decorators';
 import { SensitiveType } from '../sensitive/constants';
 import { TransformNamePipe } from '../common/pipes/name.pipes';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('students')
+@ApiTags('学生')
 export class StudentsController {
   constructor(private readonly studentsService: StudentsService) {}
 
